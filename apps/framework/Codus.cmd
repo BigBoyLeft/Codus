@@ -1,0 +1,1 @@
+C:\Dev\server\FXServer.exe +exec "configs/dev.cfg"

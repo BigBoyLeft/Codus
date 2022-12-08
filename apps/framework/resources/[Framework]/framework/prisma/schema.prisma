@@ -1,0 +1,50 @@
+generator client {
+  provider   = "prisma-client-js"
+  engineType = "binary"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model characters {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  fname      String
+  lname      String
+  dob        DateTime
+  gender     Int
+  cash       Int
+  health     Int      @default(100)
+  armour     Int      @default(0)
+  food       Int      @default(100)
+  water      Int      @default(100)
+  isDead     Boolean  @default(false)
+  appearance Json
+  users      users    @relation(fields: [userId], references: [id])
+  items      items[]
+}
+
+model items {
+  id          Int        @id @default(autoincrement())
+  characterId Int
+  name        String
+  base        String
+  slot        Int
+  rarity      Int
+  quantity    Int
+  icon        String?
+  hash        String?
+  data        Json?
+  version     String?
+  characters  characters @relation(fields: [characterId], references: [id])
+}
+
+model users {
+  id          Int          @id @default(autoincrement())
+  identifiers String[]     @default([])
+  permissions String[]     @default([])
+  actions     Json[]
+  characters  characters[]
+}

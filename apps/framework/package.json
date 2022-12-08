@@ -1,0 +1,13 @@
+{
+  "name": "framework",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node compiler.js",
+    "build:db": "node compiler.js --db",
+    "watch": "node compiler.js --watch"
+  },
+  "dependencies": {
+    "eslint-config-custom": "workspace:^0.0.0"
+  }
+}
